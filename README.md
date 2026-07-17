@@ -97,6 +97,17 @@ If you encounter a git conflict when updating your repository to V3.0 please fol
 
 Updating from V2.0 based firmwares to V3.0 based firmwares can be a rather complex process. There are reset files for every major firmware revision as well as documentation on the update process available [here](https://kinesis-ergo.com/support/kb360pro/#firmware-updates).
 
+## Scripted build and deploy
+
+Local builds (`make`) produce the no-clique variant (no ZMK Studio/Clique support compiled in). The scripts in `bin/` automate building and flashing around a notion of the "active" firmware version, recorded in `firmware/ACTIVE`:
+
+* `bin/build_and_deploy.sh` — interactive one-shot: builds both halves, promotes the build, then walks through flashing left and right. Advances automatically as the bootloader drive appears/disappears, and ends by printing the exact string Mod+V should type to verify.
+* `bin/build_and_promote.sh` — runs `make` for both halves and marks the resulting build as active.
+* `bin/deploy.sh left|right` — flashes the active firmware to the connected half (waits for the bootloader drive, verifies it's an Adv360, confirms the flash by watching for the drive to unmount). Note it cannot detect *which* half is connected — connect the half you name.
+* `bin/promote.sh <version>` — marks an existing build in `firmware/` (e.g. `202607171640-ed3256e`) as active; use to roll back.
+
+The scripts write firmware with `cat > /Volumes/ADV360PRO/NEW.UF2` because Finder and `cp` both fail against the virtual FAT bootloader volume on macOS (error -50).
+
 ## Versioning
 
 Starting on 11/15/2023 the Advantage 360 Pro will now automatically record the compilation date, branch and Git commit hash in a macro that can be accessed with Mod+V. This will type out the following string: YYYYMMDD-XXXX-YYYYYY, where XXXX is the first 4 characters of the Git branch and YYYYYY is the Git commit hash. In addition to this the builds compiled by GitHub actions are now timestamped and also record the commit hash in the filename. 
