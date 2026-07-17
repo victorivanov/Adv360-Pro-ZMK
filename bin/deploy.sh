@@ -29,7 +29,17 @@ if [ ! -d "$VOLUME" ]; then
     until [ -d "$VOLUME" ]; do sleep 1; done
 fi
 
-if ! grep -q "Model: ADV360PRO" "$VOLUME/INFO_UF2.TXT" 2>/dev/null; then
+# The mount point can appear before the volume's contents are readable, so
+# give the identity check a few seconds before giving up.
+IDENTIFIED=false
+for _ in $(seq 1 10); do
+    if grep -q "Model: ADV360PRO" "$VOLUME/INFO_UF2.TXT" 2>/dev/null; then
+        IDENTIFIED=true
+        break
+    fi
+    sleep 1
+done
+if [ "$IDENTIFIED" != true ]; then
     echo "$VOLUME does not look like the Adv360 bootloader (INFO_UF2.TXT check failed)." >&2
     exit 1
 fi

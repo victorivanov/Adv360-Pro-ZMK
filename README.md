@@ -101,7 +101,7 @@ Updating from V2.0 based firmwares to V3.0 based firmwares can be a rather compl
 
 Local builds (`make`) produce the no-clique variant (no ZMK Studio/Clique support compiled in). The scripts in `bin/` automate building and flashing around a notion of the "active" firmware version, recorded in `firmware/ACTIVE`:
 
-* `bin/build_and_deploy.sh` — interactive one-shot: builds both halves, promotes the build, then walks through flashing left and right. Advances automatically as the bootloader drive appears/disappears, and ends by printing the exact string Mod+V should type to verify.
+* `bin/build_and_deploy.sh` — interactive one-shot: builds both halves, promotes the build, then walks through flashing left and right. With `--skip-build` it skips straight to flashing the currently active firmware. Advances automatically as the bootloader drive appears/disappears, and ends by printing the exact string Mod+V should type to verify.
 * `bin/build_and_promote.sh` — runs `make` for both halves and marks the resulting build as active.
 * `bin/deploy.sh left|right` — flashes the active firmware to the connected half (waits for the bootloader drive, verifies it's an Adv360, confirms the flash by watching for the drive to unmount). Note it cannot detect *which* half is connected — connect the half you name.
 * `bin/promote.sh <version>` — marks an existing build in `firmware/` (e.g. `202607171640-ed3256e`) as active; use to roll back.
