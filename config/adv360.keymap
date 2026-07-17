@@ -31,7 +31,7 @@
         &kp EQUAL &kp N1    &kp N2   &kp N3   &kp N4     &kp N5 &tog 1                                                                        &mo 3              &kp N6 &kp N7   &kp N8    &kp N9   &kp N0   &kp MINUS
         &kp TAB   &kp Q     &kp W    &kp E    &kp R      &kp T  &none                                                                         &kp C_MUTE         &kp Y  &kp U    &kp I     &kp O    &kp P    &kp BSLH
         &kp CAPS  &kp A     &kp S    &kp D    &kp F      &kp G  &kp LC(LG(LSHIFT))    &kp LGUI &kp LALT  &kp RALT  &kp RGUI                   &kp RC(RG(RSHIFT)) &kp H  &kp J    &kp K     &kp L    &kp SEMI &kp SQT
-        &kp LSHFT &kp Z     &kp X    &kp C    &kp V      &kp B                                 &kp HOME  &kp END                                                 &kp N  &kp M    &kp COMMA &kp DOT  &kp FSLH &kp RSHFT
+        &kp LSHFT &kp Z     &kp X    &kp C    &kp V      &kp B                                 &kp DEL   &none                                                 &kp N  &kp M    &kp COMMA &kp DOT  &kp FSLH &kp RSHFT
         &mo 2     &kp GRAVE &kp CAPS &kp LEFT &kp RIGHT                &kp BSPC &kp ESC       &kp LCTRL  &kp RCTRL &kp ENTER &kp SPACE                                  &kp DOWN &kp UP    &kp LBKT &kp RBKT &mo 2
       >;
     };
@@ -51,8 +51,8 @@
         &kp F12 &kp F1 &kp F2 &kp F3 &kp F4 &kp F5 &tog 1                                           &mo 3 &kp F6       &kp F7       &kp F8     &kp F9  &kp F10 &kp F11
         &trans  &trans &trans &trans &trans &trans  &none                                           &none &trans       &trans       &trans     &trans  &trans  &kp F12
         &trans  &trans &trans &trans &trans &trans  &none        &trans &trans &trans &trans        &none &trans       &trans       &trans     &trans  &trans  &trans
-        &trans  &trans &trans &trans &trans &trans                      &trans &trans                     &trans       &kp C_BRI_DN &kp C_BRI_UP &trans &trans &trans
-        &trans  &trans &trans &trans &trans               &trans &trans &trans &trans &trans &trans              &kp C_VOL_DN &kp C_VOL_UP &kp C_MUTE &trans  &trans
+        &trans  &trans &trans &trans &trans &trans                      &kp HOME &kp END                 &trans       &kp C_BRI_DN &kp C_BRI_UP &trans &trans &trans
+        &trans  &trans &trans &trans &trans               &trans &trans &kp PG_UP &kp PG_DN &trans &trans              &kp C_VOL_DN &kp C_VOL_UP &kp C_MUTE &trans  &trans
       >;
     };
     mod {
