@@ -1,6 +1,9 @@
 DOCKER := $(shell { command -v podman || command -v docker; })
 TIMESTAMP := $(shell date -u +"%Y%m%d%H%M")
 COMMIT := $(shell git rev-parse --short HEAD 2>/dev/null)
+# docker run --tty fails in non-interactive shells (CI, agents, cron);
+# only request one when stdin actually is a TTY.
+TTY := $(shell [ -t 0 ] && echo --interactive --tty)
 ifeq ($(shell uname),Darwin)
 SELINUX1 :=
 SELINUX2 :=
@@ -14,7 +17,7 @@ endif
 all:
 	$(shell bin/get_version_local.sh >> /dev/null)
 	$(DOCKER) build --tag zmk --file Dockerfile .
-	$(DOCKER) run --rm -it --name zmk \
+	$(DOCKER) run --rm $(TTY) --name zmk \
 		-v $(PWD)/firmware:/app/firmware$(SELINUX1) \
 		-v $(PWD)/config:/app/config:ro$(SELINUX2) \
 		-e TIMESTAMP=$(TIMESTAMP) \
@@ -26,7 +29,7 @@ all:
 left:
 	$(shell bin/get_version_local.sh >> /dev/null)
 	$(DOCKER) build --tag zmk --file Dockerfile .
-	$(DOCKER) run --rm -it --name zmk \
+	$(DOCKER) run --rm $(TTY) --name zmk \
 		-v $(PWD)/firmware:/app/firmware$(SELINUX1) \
 		-v $(PWD)/config:/app/config:ro$(SELINUX2) \
 		-e TIMESTAMP=$(TIMESTAMP) \
