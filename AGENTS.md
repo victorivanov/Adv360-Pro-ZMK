@@ -11,7 +11,7 @@ ZMK firmware config for the Kinesis Advantage 360 Pro. See [README.md](README.md
 - `config/west.yml` — pins the Kinesis ZMK fork (not base ZMK) that everything builds against.
 - `config/keymap.json` / `config/info.json` — metadata for the GUI keymap editor; hand edits to `adv360.keymap` are not reflected there automatically.
 - `bin/build.sh` — the actual `west build` invocations run inside the container by both `make` and CI (`.github/workflows/build.yml`).
-- `bin/build_and_deploy.sh` — interactive build + flash flow for both halves, DON'T USE, only for user application (uses `build_and_promote.sh`, `promote.sh`, and `deploy.sh`; `firmware/ACTIVE` records the promoted version).
+- `bin/build_and_deploy.sh` — interactive build + flash flow for both halves, DON'T USE unless debugging the script itself, only for user application (uses `build_and_promote.sh`, `promote.sh`, and `deploy.sh`; `firmware/ACTIVE` records the promoted version).
 - `firmware/` — build output (`.uf2` files land here).
 
 ## Conventions
